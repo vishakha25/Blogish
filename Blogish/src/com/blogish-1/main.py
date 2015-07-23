@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import os
 import webapp2
 import string
 import re
@@ -202,9 +203,9 @@ class TestHandler(webapp2.RequestHandler):
  
         
 app = webapp2.WSGIApplication([
-    ('/signup', SignupHandler),
-    ('/main/welcome',WelcomeHandler),
-    ('/birthday',DateHandler),
-    ('/thanks',ThanksHandler)
-], debug=True)
+                               ('/signup', SignupHandler),
+                               ('/main/welcome',WelcomeHandler),
+                               ('/birthday',DateHandler),
+                               ('/thanks',ThanksHandler)
+                               ], debug=True)
 
