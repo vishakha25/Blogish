@@ -3,7 +3,7 @@ import webapp2
 import jinja2
 
 template_dir= os.path.join(os.path.dirname(__file__),'templates')
-jinja_env=jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir))
+jinja_env=jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
 
 
 class Handler(webapp2.RequestHandler):
@@ -17,8 +17,17 @@ class Handler(webapp2.RequestHandler):
     
 class MainPage(Handler):
     def get(self):
-        self.render("shopping_list.html")
-      
+        items= self.request.get_all("food")
+        self.render("shopping_list.html", items=items)
+
+        
+class FizzBuzzHandler(Handler):        
+    def get(self):
+        n=self.request.get("n")
+        n=int(n)
+        self.render("fizzBuzz.html",n=n)
+        
 app = webapp2.WSGIApplication([
-    ('/', MainPage)
+    ('/', MainPage),
+    ('/fizzbuzz',FizzBuzzHandler)
 ], debug=True)
